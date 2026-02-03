@@ -91,13 +91,13 @@ exports[`logger > should log as expected 3`] = `
 `;
 
 exports[`logger > should log error with cause correctly 1`] = `
-"<CLR=31,BOLD>error  </CLR>     at /rslog/foo/bar.js:29:0
-<CLR=90><CLR=39><CLR=33>
-  [cause]: <CLR=39>    at /rslog/foo/bar.js:29:0
-<CLR=90><CLR=39>"
+"error       at /rslog/foo/bar.js:29:0
+
+  [cause]:     at /rslog/foo/bar.js:29:0
+"
 `;
 
 exports[`logger > should log error with stack correctly 1`] = `
-"<CLR=31,BOLD>error  </CLR>     at /rslog/foo/bar.js:29:0
-<CLR=90><CLR=39>"
+"error       at /rslog/foo/bar.js:29:0
+"
 `;
