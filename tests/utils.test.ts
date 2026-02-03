@@ -14,7 +14,7 @@ describe('isErrorStackMessage', () => {
 
     expect(
       isErrorStackMessage(
-        '    at async Command.<anonymous> (rslog/packages/foo/dist/cjs/index.js:55:5)',
+        '    at async Command.<anonymous> (rslog/packages/foo/dist/index.js:55:5)',
       ),
     ).toBeTruthy();
 

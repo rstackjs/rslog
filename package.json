@@ -10,11 +10,9 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "default": "./dist/index.js"
     }
   },
-  "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -38,6 +36,9 @@
     "typescript": "~5.9.3"
   },
   "packageManager": "pnpm@10.24.0",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

@@ -37,13 +37,7 @@ bun add rslog
 
 ## Usage
 
-- Require:
-
 ```js
-// with require
-const { logger } = require('rslog');
-
-// with import
 import { logger } from 'rslog';
 ```
 
