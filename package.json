@@ -26,16 +26,16 @@
     "test": "rstest"
   },
   "devDependencies": {
-    "@rslib/core": "^0.18.2",
-    "@rstest/core": "^0.6.8",
-    "@types/node": "^24.10.1",
+    "@rslib/core": "^0.19.4",
+    "@rstest/core": "^0.8.1",
+    "@types/node": "^24.10.9",
     "path-serializer": "^0.5.1",
-    "prettier": "~3.7.3",
+    "prettier": "~3.8.1",
     "strip-ansi": "^7.1.2",
     "supports-color": "^10.2.2",
     "typescript": "~5.9.3"
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.28.2",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
   },
