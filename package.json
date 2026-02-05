@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@rslib/core": "^0.19.4",
-    "@rstest/core": "^0.8.1",
+    "@rstest/core": "^0.8.3",
     "@types/node": "^24.10.9",
     "path-serializer": "^0.5.1",
     "prettier": "~3.8.1",
