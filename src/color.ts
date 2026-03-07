@@ -1,11 +1,27 @@
-import { styleText } from 'node:util';
+import util from 'node:util';
 
 export type ColorFn = (text: string | number) => string;
 
+function checkNodeVersion() {
+  if (
+    'styleText' in util ||
+    !process.versions.node ||
+    process.versions.bun ||
+    process.versions.deno
+  )
+    return;
+
+  throw new Error(
+    `Unsupported Node.js version: "${process.versions.node || 'unknown'}". Expected Node.js >= 20.`,
+  );
+}
+
+checkNodeVersion();
+
 const createStyler =
-  (style: Parameters<typeof styleText>[0]): ColorFn =>
+  (style: Parameters<typeof util.styleText>[0]): ColorFn =>
   text =>
-    styleText(style, String(text));
+    util.styleText(style, String(text));
 
 export const bold = createStyler('bold');
 export const red = createStyler('red');
