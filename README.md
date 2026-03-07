@@ -35,6 +35,8 @@ pnpm add rslog
 bun add rslog
 ```
 
+Rslog requires Node.js `^20.19.0 || >=22.12.0`. If you are on Node 18, upgrade Node before using the package.
+
 ## Usage
 
 ```js
@@ -132,7 +134,7 @@ logger.override({
 
 ## Environment
 
-Rslog provides both CommonJS and ESModule output and supports Node.js >= 14.
+Rslog supports Node.js `^20.19.0 || >=22.12.0`.
 
 ## Credits
 
