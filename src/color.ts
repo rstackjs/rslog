@@ -3,14 +3,10 @@ import util from 'node:util';
 export type ColorFn = (text: string | number) => string;
 
 function checkNodeVersion() {
-  if (
-    'styleText' in util ||
-    !process.versions.node ||
-    process.versions.bun ||
-    process.versions.deno
-  )
+  const { versions } = process;
+  if ('styleText' in util || !versions.node || versions.bun || versions.deno) {
     return;
-
+  }
   throw new Error(
     `Unsupported Node.js version: "${process.versions.node || 'unknown'}". Expected Node.js >= 20.`,
   );
