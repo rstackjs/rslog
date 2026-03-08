@@ -1,4 +1,4 @@
-import { bold, cyan } from './color.js';
+import { color } from './color.js';
 import { colorLevel } from './utils.js';
 
 // RGB for #bdfff3
@@ -10,7 +10,7 @@ let isWord = (char: string) => !/[\s\n]/.test(char);
 
 export let gradient = (message: string) => {
   if (colorLevel < 3) {
-    return colorLevel === 2 ? bold(cyan(message)) : message;
+    return colorLevel === 2 ? color.cyan(message) : message;
   }
 
   // split string and handle emoji correctly
@@ -36,5 +36,5 @@ export let gradient = (message: string) => {
     )}m${char}\x1b[39m`;
   }
 
-  return bold(output);
+  return color.bold(output);
 };

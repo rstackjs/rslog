@@ -19,10 +19,19 @@ const createStyler =
   text =>
     util.styleText(style, String(text));
 
-export const bold = createStyler('bold');
-export const red = createStyler('red');
-export const green = createStyler('green');
-export const yellow = createStyler('yellow');
-export const magenta = createStyler('magenta');
-export const cyan = createStyler('cyan');
-export const gray = createStyler('gray');
+export const color = {
+  dim: createStyler('dim'),
+  red: createStyler('red'),
+  bold: createStyler('bold'),
+  blue: createStyler('blue'),
+  cyan: createStyler('cyan'),
+  gray: createStyler('gray'),
+  black: createStyler('black'),
+  green: createStyler('green'),
+  white: createStyler('white'),
+  reset: createStyler('reset'),
+  yellow: createStyler('yellow'),
+  magenta: createStyler('magenta'),
+  underline: createStyler('underline'),
+  strikethrough: createStyler('strikethrough'),
+};
