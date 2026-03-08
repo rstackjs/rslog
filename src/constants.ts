@@ -1,4 +1,4 @@
-import { red, yellow, cyan, green, magenta } from './color.js';
+import { color } from './color.js';
 import type { LogType } from './types.js';
 
 export let LOG_LEVEL = {
@@ -16,34 +16,34 @@ export let LOG_TYPES = {
   error: {
     label: 'error',
     level: 'error',
-    color: red,
+    color: color.red,
   },
   // Level warn
   warn: {
     label: 'warn',
     level: 'warn',
-    color: yellow,
+    color: color.yellow,
   },
   // Level info
   info: {
     label: 'info',
     level: 'info',
-    color: cyan,
+    color: color.cyan,
   },
   start: {
     label: 'start',
     level: 'info',
-    color: cyan,
+    color: color.cyan,
   },
   ready: {
     label: 'ready',
     level: 'info',
-    color: green,
+    color: color.green,
   },
   success: {
     label: 'success',
     level: 'info',
-    color: green,
+    color: color.green,
   },
   log: {
     level: 'info',
@@ -52,6 +52,6 @@ export let LOG_TYPES = {
   debug: {
     label: 'debug',
     level: 'verbose',
-    color: magenta,
+    color: color.magenta,
   },
 } satisfies Record<string, LogType>;

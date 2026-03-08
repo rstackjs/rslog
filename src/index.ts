@@ -1,6 +1,7 @@
 import { createLogger } from './createLogger.js';
 
 export { createLogger };
+export { color } from './color.js';
 
 export let logger = createLogger();
 

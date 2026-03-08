@@ -1,4 +1,4 @@
-import { bold, gray, yellow } from './color.js';
+import { color } from './color.js';
 import { gradient } from './gradient.js';
 import { LOG_LEVEL, LOG_TYPES } from './constants.js';
 import { isErrorStackMessage } from './utils.js';
@@ -10,7 +10,7 @@ const normalizeErrorMessage = (err: Error) => {
     if (name.startsWith('Error: ')) {
       name = name.slice(7);
     }
-    return `${name}\n${gray(rest.join('\n'))}`;
+    return `${name}\n${color.gray(rest.join('\n'))}`;
   }
 
   return err.message;
@@ -36,7 +36,7 @@ export let createLogger = (options: Options = {}) => {
 
     if ('label' in logType) {
       label = (logType.label || '').padEnd(7);
-      label = bold(logType.color ? logType.color(label) : label);
+      label = color.bold(logType.color ? logType.color(label) : label);
     }
 
     if (message instanceof Error) {
@@ -44,7 +44,7 @@ export let createLogger = (options: Options = {}) => {
 
       const { cause } = message;
       if (cause) {
-        text += yellow('\n  [cause]: ');
+        text += color.yellow('\n  [cause]: ');
         text +=
           cause instanceof Error ? normalizeErrorMessage(cause) : String(cause);
       }
@@ -53,7 +53,7 @@ export let createLogger = (options: Options = {}) => {
     else if (level === 'error' && typeof message === 'string') {
       let lines = message.split('\n');
       text = lines
-        .map(line => (isErrorStackMessage(line) ? gray(line) : line))
+        .map(line => (isErrorStackMessage(line) ? color.gray(line) : line))
         .join('\n');
     } else {
       text = `${message}`;
