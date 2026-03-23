@@ -18,8 +18,9 @@ const normalizeErrorMessage = (err: Error) => {
 
 export let createLogger = (options: Options = {}) => {
   let maxLevel = options.level || 'info';
+  const console = options.console ?? globalThis.console;
 
-  let log = (type: LogMethods, message?: LogMessage, ...args: string[]) => {
+  let log = (type: LogMethods, message?: LogMessage, ...args: any[]) => {
     let logType = LOG_TYPES[type];
     const { level } = logType;
 

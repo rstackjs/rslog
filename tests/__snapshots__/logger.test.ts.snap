@@ -101,3 +101,40 @@ exports[`logger > should log error with stack correctly 1`] = `
 "error       at /rslog/foo/bar.js:29:0
 "
 `;
+
+exports[`logger > should use custom console correctly 1`] = `
+[
+  [
+    "😊 Rslog v1.0.0
+",
+  ],
+  [
+    "this is a log message",
+  ],
+  [
+    "info    this is an info message",
+  ],
+  [
+    "ready   this is a ready message",
+  ],
+  [
+    "success this is a success message",
+  ],
+]
+`;
+
+exports[`logger > should use custom console correctly 2`] = `
+[
+  [
+    "warn    this is a warn message",
+  ],
+]
+`;
+
+exports[`logger > should use custom console correctly 3`] = `
+[
+  [
+    "error   this is a error message",
+  ],
+]
+`;
