@@ -2,7 +2,13 @@ import { color } from './color.js';
 import { gradient } from './gradient.js';
 import { LOG_LEVEL, LOG_TYPES } from './constants.js';
 import { isErrorStackMessage } from './utils.js';
-import type { Options, LogMessage, Logger, LogMethods } from './types.js';
+import type {
+  Options,
+  LogMessage,
+  Logger,
+  LogMethods,
+  LoggerOptions,
+} from './types.js';
 
 const normalizeErrorMessage = (err: Error) => {
   if (err.stack) {
@@ -16,11 +22,9 @@ const normalizeErrorMessage = (err: Error) => {
   return err.message;
 };
 
-export let createLogger = ({
-  level = 'info',
-  prefix,
-  console = globalThis.console,
-}: Options = {}) => {
+export let createLogger = (options: Options = {}) => {
+  const { level = 'info', prefix, console = globalThis.console } = options;
+
   let maxLevel = level;
 
   let log = (type: LogMethods, message?: LogMessage, ...args: any[]) => {
@@ -84,6 +88,10 @@ export let createLogger = ({
     set(val) {
       maxLevel = val;
     },
+  });
+
+  Object.defineProperty(logger, 'options', {
+    get: (): Options => ({ ...options }),
   });
 
   logger.override = customLogger => {
