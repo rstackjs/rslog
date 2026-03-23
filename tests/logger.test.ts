@@ -81,6 +81,27 @@ describe('logger', () => {
     ).toMatchSnapshot();
   });
 
+  test('should prepend prefix correctly', () => {
+    console.log = rs.fn();
+    console.warn = rs.fn();
+    console.error = rs.fn();
+
+    const logger = createLogger({
+      prefix: '[web]',
+      level: 'verbose',
+    });
+
+    printTestLogs(logger);
+
+    [console.log, console.warn, console.error].forEach(consoleFn => {
+      expect(
+        (consoleFn as Mock).mock.calls.map(items =>
+          items.map(item => stripAnsi(item.toString())),
+        ),
+      ).toMatchSnapshot();
+    });
+  });
+
   test('should log error with stack correctly', () => {
     console.error = rs.fn();
 

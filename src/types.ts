@@ -20,6 +20,11 @@ export interface Options {
    */
   level?: LogLevel;
   /**
+   * Prepends a fixed prefix to every log message.
+   * @default undefined
+   */
+  prefix?: string;
+  /**
    * Overrides the console used by this logger instance.
    * @default globalThis.console
    */
