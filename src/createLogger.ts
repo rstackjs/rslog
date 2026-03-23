@@ -2,13 +2,7 @@ import { color } from './color.js';
 import { gradient } from './gradient.js';
 import { LOG_LEVEL, LOG_TYPES } from './constants.js';
 import { isErrorStackMessage } from './utils.js';
-import type {
-  Options,
-  LogMessage,
-  Logger,
-  LogMethods,
-  LoggerOptions,
-} from './types.js';
+import type { Options, LogMessage, Logger, LogMethods } from './types.js';
 
 const normalizeErrorMessage = (err: Error) => {
   if (err.stack) {
