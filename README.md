@@ -10,7 +10,7 @@
 
 A tiny, intuitive, type-friendly logger for Node.js.
 
-- **Tiny**. [2kB gzipped](https://bundlephobia.com/package/rslog@1).
+- **Tiny**. [2kB gzipped](https://bundlephobia.com/package/rslog).
 - **Clean**. Zero dependencies.
 - **Intuitive**. Clear log prefix.
 - **Type-friendly**. Written in TypeScript.
@@ -151,15 +151,23 @@ const logger = createLogger({
 });
 ```
 
+## Color
+
+You can import `color` directly from `rslog` to style your own output:
+
+It is a small wrapper around Node.js `styleText`, with a simpler API for common styling.
+
+```js
+import { color, logger } from 'rslog';
+
+logger.success(color.green('done'));
+logger.info(color.bold(color.blue('build complete')));
+logger.error(color.red('something went wrong'));
+```
+
 ## Environment
 
 Rslog supports Node.js `^20.19.0 || >=22.12.0`.
-
-## Credits
-
-Rslog is built with [Rslib](https://github.com/web-infra-dev/rslib).
-
-The color implementation of Rslog are modified from [alexeyraspopov/picocolors](https://github.com/alexeyraspopov/picocolors).
 
 ## License
 
