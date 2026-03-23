@@ -14,7 +14,15 @@ export interface LogType {
 export type LogFunction = (message?: LogMessage, ...args: any[]) => void;
 
 export interface Options {
+  /**
+   * Controls which log levels are emitted.
+   * @default 'info'
+   */
   level?: LogLevel;
+  /**
+   * Overrides the console used by this logger instance.
+   * @default globalThis.console
+   */
   console?: Pick<Console, 'log' | 'warn' | 'error'>;
 }
 
