@@ -83,7 +83,7 @@ describe('logger', () => {
 
   test('should log error with stack correctly', () => {
     console.error = rs.fn();
-    
+
     const err = new Error('this is an error message');
 
     err.stack = '    at /rslog/foo/bar.js:29:0';
@@ -117,5 +117,37 @@ describe('logger', () => {
     printTestLogs(logger);
 
     expect((console.log as Mock).mock.calls.length).toBe(0);
+  });
+
+  test('should use custom console correctly', () => {
+    console.log = rs.fn();
+    console.warn = rs.fn();
+    console.error = rs.fn();
+
+    const customConsole = {
+      log: rs.fn(),
+      warn: rs.fn(),
+      error: rs.fn(),
+    };
+
+    const logger = createLogger({
+      console: customConsole,
+    });
+
+    printTestLogs(logger);
+
+    [customConsole.log, customConsole.warn, customConsole.error].forEach(
+      consoleFn => {
+        expect(
+          (consoleFn as Mock).mock.calls.map(items =>
+            items.map(item => stripAnsi(item.toString())),
+          ),
+        ).toMatchSnapshot();
+      },
+    );
+
+    expect((console.log as Mock).mock.calls.length).toBe(0);
+    expect((console.warn as Mock).mock.calls.length).toBe(0);
+    expect((console.error as Mock).mock.calls.length).toBe(0);
   });
 });

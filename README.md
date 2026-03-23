@@ -132,6 +132,25 @@ logger.override({
 });
 ```
 
+## Custom Console
+
+You can also provide a custom `console` implementation when creating a logger:
+
+```js
+import { Console } from 'node:console';
+import { createWriteStream } from 'node:fs';
+import { createLogger } from 'rslog';
+
+const customConsole = new Console({
+  stdout: createWriteStream('./stdout.log'),
+  stderr: createWriteStream('./stderr.log'),
+});
+
+const logger = createLogger({
+  console: customConsole,
+});
+```
+
 ## Environment
 
 Rslog supports Node.js `^20.19.0 || >=22.12.0`.

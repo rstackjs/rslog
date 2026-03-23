@@ -15,6 +15,7 @@ export type LogFunction = (message?: LogMessage, ...args: any[]) => void;
 
 export interface Options {
   level?: LogLevel;
+  console?: Pick<Console, 'log' | 'warn' | 'error'>;
 }
 
 export type LogMethods = keyof typeof LOG_TYPES;
