@@ -132,6 +132,22 @@ logger.override({
 });
 ```
 
+## Options
+
+You can read the original options passed to `createLogger` from `logger.options`:
+
+```js
+import { createLogger } from 'rslog';
+
+const logger = createLogger({
+  prefix: '[web]',
+  level: 'warn',
+});
+
+console.log(logger.options);
+// { prefix: '[web]', level: 'warn' }
+```
+
 ## Custom Console
 
 You can also provide a custom `console` implementation when creating a logger:

@@ -171,4 +171,26 @@ describe('logger', () => {
     expect((console.warn as Mock).mock.calls.length).toBe(0);
     expect((console.error as Mock).mock.calls.length).toBe(0);
   });
+
+  test('should expose original logger options correctly', () => {
+    const customConsole = {
+      log: rs.fn(),
+      warn: rs.fn(),
+      error: rs.fn(),
+    };
+
+    const logger = createLogger({
+      prefix: '[web]',
+      level: 'warn',
+      console: customConsole,
+    });
+
+    logger.level = 'verbose';
+
+    expect(logger.options).toEqual({
+      prefix: '[web]',
+      level: 'warn',
+      console: customConsole,
+    });
+  });
 });

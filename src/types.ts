@@ -36,5 +36,6 @@ export type LogMethods = keyof typeof LOG_TYPES;
 export type Logger = Record<LogMethods, LogFunction> & {
   greet: (message: string) => void;
   level: LogLevel;
+  readonly options: Options;
   override: (customLogger: Partial<Record<LogMethods, LogFunction>>) => void;
 };
