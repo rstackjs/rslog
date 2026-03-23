@@ -102,6 +102,46 @@ exports[`logger > should log error with stack correctly 1`] = `
 "
 `;
 
+exports[`logger > should prepend prefix correctly 1`] = `
+[
+  [
+    "[web] 😊 Rslog v1.0.0
+",
+  ],
+  [
+    "[web] this is a log message",
+  ],
+  [
+    "info    [web] this is an info message",
+  ],
+  [
+    "ready   [web] this is a ready message",
+  ],
+  [
+    "debug   [web] this is a debug message",
+  ],
+  [
+    "success [web] this is a success message",
+  ],
+]
+`;
+
+exports[`logger > should prepend prefix correctly 2`] = `
+[
+  [
+    "warn    [web] this is a warn message",
+  ],
+]
+`;
+
+exports[`logger > should prepend prefix correctly 3`] = `
+[
+  [
+    "error   [web] this is a error message",
+  ],
+]
+`;
+
 exports[`logger > should use custom console correctly 1`] = `
 [
   [

@@ -151,6 +151,21 @@ const logger = createLogger({
 });
 ```
 
+## Prefix
+
+You can prepend a fixed prefix to every log message:
+
+```js
+import { createLogger } from 'rslog';
+
+const logger = createLogger({
+  prefix: '[web]',
+});
+
+logger.info('server started');
+// info    [web] server started
+```
+
 ## Color
 
 You can import `color` directly from `rslog` to style your own output:

@@ -18,6 +18,7 @@ const normalizeErrorMessage = (err: Error) => {
 
 export let createLogger = ({
   level = 'info',
+  prefix,
   console = globalThis.console,
 }: Options = {}) => {
   let maxLevel = level;
@@ -60,6 +61,10 @@ export let createLogger = ({
         .join('\n');
     } else {
       text = `${message}`;
+    }
+
+    if (prefix) {
+      text = `${prefix} ${text}`;
     }
 
     const method = level === 'error' || level === 'warn' ? level : 'log';
