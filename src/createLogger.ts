@@ -21,7 +21,7 @@ export let createLogger = (options: Options = {}) => {
 
   let maxLevel = level;
 
-  let log = (type: LogMethods, message?: LogMessage, ...args: any[]) => {
+  let log = (type: LogMethods, message?: LogMessage, ...args: unknown[]) => {
     let logType = LOG_TYPES[type];
     const { level } = logType;
 

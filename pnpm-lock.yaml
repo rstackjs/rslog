@@ -11,6 +11,9 @@ importers:
       '@rslib/core':
         specifier: ^0.20.0
         version: 0.20.0(core-js@3.47.0)(typescript@5.9.3)
+      '@rslint/core':
+        specifier: ^0.3.3
+        version: 0.3.3
       '@rstest/core':
         specifier: ^0.9.4
         version: 0.9.4(core-js@3.47.0)
@@ -141,6 +144,45 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  '@rslint/core@0.3.3':
+    resolution: {integrity: sha512-QtXXmAEAmMr4okkmQ3pHpTSifdkhzZHnLHiSVb/LnvCw8bOgooG9nfUihhGFgB0ezwRQ+vFr5vaHTEgx7tj5dw==}
+    hasBin: true
+    peerDependencies:
+      jiti: ^2.0.0
+    peerDependenciesMeta:
+      jiti:
+        optional: true
+
+  '@rslint/darwin-arm64@0.3.3':
+    resolution: {integrity: sha512-uEyVAg1lJhiZIvVtF++UScNL2jkN8OcjJEERVTbRSMjQX0Kro3BQki5A9qm4pkcPb9db6GDC8xCfMY0HHmziSw==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@rslint/darwin-x64@0.3.3':
+    resolution: {integrity: sha512-9K+6NQSnesba/fqtTu5dqVuIsUWNj2rivZVi8eIUyA/kqA2Q+yT3yyxV+8+0RVHWVWBWNcpqDbZs0zHEWbJ1pA==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@rslint/linux-arm64@0.3.3':
+    resolution: {integrity: sha512-w2xtaWG39w9YIaHuLExjBDmvr445b74eHUv4TqwtL+SvDVA74rQAKzRJdiAsM+bN8KCYIcx5vinVqKw89QzfoQ==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@rslint/linux-x64@0.3.3':
+    resolution: {integrity: sha512-zb98H2hpSeyhQdVXBm4YEfvcL1jhicHv/nSLxQbCWg0+vMkKcvCNmy8kq9KzvR00if1jmoxnVYxSH0ZWfSzlVg==}
+    cpu: [x64]
+    os: [linux]
+
+  '@rslint/win32-arm64@0.3.3':
+    resolution: {integrity: sha512-z3Q/llH2X2UEGCD4RT2ogeDMQezTqKoxXND0lEvn3PuCr7egXSc9mwsTCXlmmuegusdlojE436XSijx95TWvfw==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@rslint/win32-x64@0.3.3':
+    resolution: {integrity: sha512-NZnrLKaWqZPSoObkg4FcLMf5uyhFBGegXDuCDafPYZtV8l9ZkRzj5bHWLfkII7UtNLROV7EeS7PuHq5JI/nbgw==}
+    cpu: [x64]
+    os: [win32]
 
   '@rspack/binding-darwin-arm64@2.0.0-beta.6':
     resolution: {integrity: sha512-FQ8zflthQJJf0cM0vDFnfnXrTOnRvwz886tiafbwu1RO5qmh+pJH+xg1eQaLPnRPqLTlcmnpngyacYFUxw+1AA==}
@@ -456,6 +498,33 @@ snapshots:
       - '@module-federation/runtime-tools'
       - '@typescript/native-preview'
       - core-js
+
+  '@rslint/core@0.3.3':
+    optionalDependencies:
+      '@rslint/darwin-arm64': 0.3.3
+      '@rslint/darwin-x64': 0.3.3
+      '@rslint/linux-arm64': 0.3.3
+      '@rslint/linux-x64': 0.3.3
+      '@rslint/win32-arm64': 0.3.3
+      '@rslint/win32-x64': 0.3.3
+
+  '@rslint/darwin-arm64@0.3.3':
+    optional: true
+
+  '@rslint/darwin-x64@0.3.3':
+    optional: true
+
+  '@rslint/linux-arm64@0.3.3':
+    optional: true
+
+  '@rslint/linux-x64@0.3.3':
+    optional: true
+
+  '@rslint/win32-arm64@0.3.3':
+    optional: true
+
+  '@rslint/win32-x64@0.3.3':
+    optional: true
 
   '@rspack/binding-darwin-arm64@2.0.0-beta.6':
     optional: true

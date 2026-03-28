@@ -11,7 +11,7 @@ export interface LogType {
   color?: ColorFn;
 }
 
-export type LogFunction = (message?: LogMessage, ...args: any[]) => void;
+export type LogFunction = (message?: LogMessage, ...args: unknown[]) => void;
 
 export interface Options {
   /**
