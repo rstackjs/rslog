@@ -5,7 +5,8 @@
     "lib": ["ESNext"],
     "skipLibCheck": true,
     "declaration": true,
-    "moduleResolution": "bundler",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "types": ["@rstest/core/globals"],
     "isolatedModules": true
   },
