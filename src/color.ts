@@ -16,7 +16,7 @@ checkNodeVersion();
 
 const createStyler =
   (style: Parameters<typeof util.styleText>[0]): ColorFn =>
-  text =>
+  (text) =>
     util.styleText(style, String(text));
 
 export const color = {

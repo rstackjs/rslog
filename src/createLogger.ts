@@ -55,7 +55,7 @@ export let createLogger = (options: Options = {}) => {
     else if (level === 'error' && typeof message === 'string') {
       let lines = message.split('\n');
       text = lines
-        .map(line => (isErrorStackMessage(line) ? color.gray(line) : line))
+        .map((line) => (isErrorStackMessage(line) ? color.gray(line) : line))
         .join('\n');
     } else {
       text = `${message}`;
@@ -73,7 +73,7 @@ export let createLogger = (options: Options = {}) => {
     greet: (message: string) => log('log', gradient(message)),
   } as Logger;
 
-  (Object.keys(LOG_TYPES) as LogMethods[]).forEach(key => {
+  (Object.keys(LOG_TYPES) as LogMethods[]).forEach((key) => {
     logger[key] = (...args) => log(key, ...args);
   });
 
@@ -88,7 +88,7 @@ export let createLogger = (options: Options = {}) => {
     get: (): Options => ({ ...options }),
   });
 
-  logger.override = customLogger => {
+  logger.override = (customLogger) => {
     Object.assign(logger, customLogger);
   };
 

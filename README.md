@@ -117,16 +117,16 @@ You can use `logger.override` to override some or all methods of the default log
 import { logger } from 'rslog';
 
 logger.override({
-  log: message => {
+  log: (message) => {
     console.log(`[LOG] ${message}`);
   },
-  info: message => {
+  info: (message) => {
     console.log(`[INFO] ${message}`);
   },
-  warn: message => {
+  warn: (message) => {
     console.log(`[WARN] ${message}`);
   },
-  error: message => {
+  error: (message) => {
     console.log(`[ERROR] ${message}`);
   },
 });
