@@ -1,21 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
+    "rootDir": "src",
+    "target": "ES2023",
     "lib": ["ESNext"],
-    "allowJs": true,
-    "module": "Node16",
-    "strict": true,
-    "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "declaration": true,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "moduleResolution": "node16",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "types": ["@rstest/core/globals"],
-    "paths": {
-      "@/*": ["./src/*"]
-    },
     "isolatedModules": true
   },
   "include": ["src"],
