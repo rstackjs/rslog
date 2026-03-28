@@ -20,6 +20,7 @@
   "scripts": {
     "build": "rslib",
     "bump": "npx bumpp",
+    "lint": "rslint",
     "dev": "rslib --watch",
     "prepare": "rslib",
     "preview": "node ./preview/index.ts",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@rslib/core": "^0.20.0",
+    "@rslint/core": "^0.3.3",
     "@rstest/core": "^0.9.4",
     "@types/node": "^24.12.0",
     "path-serializer": "^0.6.0",
