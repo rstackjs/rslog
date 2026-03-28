@@ -18,7 +18,9 @@ describe('isErrorStackMessage', () => {
       ),
     ).toBeTruthy();
 
-    expect(isErrorStackMessage('             at async Promise.all (index 0)')).toBeTruthy();
+    expect(
+      isErrorStackMessage('             at async Promise.all (index 0)'),
+    ).toBeTruthy();
 
     expect(
       isErrorStackMessage('    at transform.next (<anonymous>)'),

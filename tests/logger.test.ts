@@ -30,10 +30,10 @@ describe('logger', () => {
 
     printTestLogs(logger);
 
-    [console.log, console.warn, console.error].forEach(consoleFn => {
+    [console.log, console.warn, console.error].forEach((consoleFn) => {
       expect(
-        (consoleFn as Mock).mock.calls.map(items =>
-          items.map(item => stripAnsi(item.toString())),
+        (consoleFn as Mock).mock.calls.map((items) =>
+          items.map((item) => stripAnsi(item.toString())),
         ),
       ).toMatchSnapshot();
     });
@@ -50,10 +50,10 @@ describe('logger', () => {
 
     printTestLogs(logger);
 
-    [console.log, console.warn, console.error].forEach(consoleFn => {
+    [console.log, console.warn, console.error].forEach((consoleFn) => {
       expect(
-        (consoleFn as Mock).mock.calls.map(items =>
-          items.map(item => stripAnsi(item.toString())),
+        (consoleFn as Mock).mock.calls.map((items) =>
+          items.map((item) => stripAnsi(item.toString())),
         ),
       ).toMatchSnapshot();
     });
@@ -70,13 +70,13 @@ describe('logger', () => {
     printTestLogs(logger);
 
     expect(
-      (console.warn as Mock).mock.calls.map(items =>
-        items.map(item => stripAnsi(item.toString())),
+      (console.warn as Mock).mock.calls.map((items) =>
+        items.map((item) => stripAnsi(item.toString())),
       ),
     ).toMatchSnapshot();
     expect(
-      (console.error as Mock).mock.calls.map(items =>
-        items.map(item => stripAnsi(item.toString())),
+      (console.error as Mock).mock.calls.map((items) =>
+        items.map((item) => stripAnsi(item.toString())),
       ),
     ).toMatchSnapshot();
   });
@@ -93,10 +93,10 @@ describe('logger', () => {
 
     printTestLogs(logger);
 
-    [console.log, console.warn, console.error].forEach(consoleFn => {
+    [console.log, console.warn, console.error].forEach((consoleFn) => {
       expect(
-        (consoleFn as Mock).mock.calls.map(items =>
-          items.map(item => stripAnsi(item.toString())),
+        (consoleFn as Mock).mock.calls.map((items) =>
+          items.map((item) => stripAnsi(item.toString())),
         ),
       ).toMatchSnapshot();
     });
@@ -158,10 +158,10 @@ describe('logger', () => {
     printTestLogs(logger);
 
     [customConsole.log, customConsole.warn, customConsole.error].forEach(
-      consoleFn => {
+      (consoleFn) => {
         expect(
-          (consoleFn as Mock).mock.calls.map(items =>
-            items.map(item => stripAnsi(item.toString())),
+          (consoleFn as Mock).mock.calls.map((items) =>
+            items.map((item) => stripAnsi(item.toString())),
           ),
         ).toMatchSnapshot();
       },
