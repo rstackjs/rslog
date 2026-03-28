@@ -3,7 +3,7 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "target": "ES2023",
-    "types": ["node"],
+    "types": ["node", "@rstest/core/globals"],
     "lib": ["DOM", "ESNext"],
     "declaration": true,
     "isolatedModules": true,
