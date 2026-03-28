@@ -21,7 +21,7 @@ importers:
         specifier: ^0.6.0
         version: 0.6.0
       prettier:
-        specifier: ~3.8.1
+        specifier: ^3.8.1
         version: 3.8.1
       strip-ansi:
         specifier: ^7.2.0

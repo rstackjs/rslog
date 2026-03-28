@@ -18,10 +18,10 @@
     "dist"
   ],
   "scripts": {
-    "build": "rslib build",
+    "build": "rslib",
     "bump": "npx bumpp",
-    "dev": "rslib build --watch",
-    "prepare": "rslib build",
+    "dev": "rslib --watch",
+    "prepare": "rslib",
     "preview": "node ./preview/index.ts",
     "test": "rstest"
   },
@@ -30,7 +30,7 @@
     "@rstest/core": "^0.9.4",
     "@types/node": "^24.12.0",
     "path-serializer": "^0.6.0",
-    "prettier": "~3.8.1",
+    "prettier": "^3.8.1",
     "strip-ansi": "^7.2.0",
     "supports-color": "^10.2.2",
     "typescript": "~5.9.3"
