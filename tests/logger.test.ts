@@ -111,7 +111,9 @@ describe('logger', () => {
 
     logger.error(err);
 
-    expect((console.error as Mock).mock.calls[0][0]).toMatchSnapshot();
+    expect(
+      stripAnsi((console.error as Mock).mock.calls[0][0].toString()),
+    ).toMatchSnapshot();
   });
 
   test('should log error with cause correctly', () => {
@@ -125,7 +127,9 @@ describe('logger', () => {
 
     logger.error(err);
 
-    expect((console.error as Mock).mock.calls[0][0]).toMatchSnapshot();
+    expect(
+      stripAnsi((console.error as Mock).mock.calls[0][0].toString()),
+    ).toMatchSnapshot();
   });
 
   test('should create new logger with silent level correctly', () => {
