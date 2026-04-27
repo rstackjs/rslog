@@ -6,23 +6,23 @@ import type { Options, LogMessage, Logger, LogMethods } from './types.js';
 
 const normalizeErrorMessage = (err: Error) => {
   if (err.stack) {
-    let [name, ...rest] = err.stack.split('\n');
-    if (name.startsWith('Error: ')) {
-      name = name.slice(7);
-    }
+    const [rawName, ...rest] = err.stack.split('\n');
+    const name = rawName.startsWith('Error: ')
+      ? rawName.slice(7)
+      : rawName;
     return `${name}\n${color.gray(rest.join('\n'))}`;
   }
 
   return err.message;
 };
 
-export let createLogger = (options: Options = {}) => {
+export const createLogger = (options: Options = {}) => {
   const { level = 'info', prefix, console = globalThis.console } = options;
 
   let maxLevel = level;
 
-  let log = (type: LogMethods, message?: LogMessage, ...args: unknown[]) => {
-    let logType = LOG_TYPES[type];
+  const log = (type: LogMethods, message?: LogMessage, ...args: unknown[]) => {
+    const logType = LOG_TYPES[type];
     const { level } = logType;
 
     if (LOG_LEVEL[level] > LOG_LEVEL[maxLevel]) {
@@ -53,7 +53,7 @@ export let createLogger = (options: Options = {}) => {
     }
     // change the color of error stacks to
     else if (level === 'error' && typeof message === 'string') {
-      let lines = message.split('\n');
+      const lines = message.split('\n');
       text = lines
         .map((line) => (isErrorStackMessage(line) ? color.gray(line) : line))
         .join('\n');
@@ -69,7 +69,7 @@ export let createLogger = (options: Options = {}) => {
     console[method](label.length ? `${label} ${text}` : text, ...args);
   };
 
-  let logger = {
+  const logger = {
     greet: (message: string) => log('log', gradient(message)),
   } as Logger;
 
