@@ -3,7 +3,7 @@ import { createLogger } from './createLogger.js';
 export { createLogger };
 export { color } from './color.js';
 
-export let logger = createLogger();
+export const logger = createLogger();
 
 export type {
   Options,

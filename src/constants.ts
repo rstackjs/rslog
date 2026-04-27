@@ -1,7 +1,7 @@
 import { color } from './color.js';
 import type { LogType } from './types.js';
 
-export let LOG_LEVEL = {
+export const LOG_LEVEL = {
   silent: -1,
   error: 0,
   warn: 1,
@@ -11,7 +11,7 @@ export let LOG_LEVEL = {
   verbose: 3,
 } as const;
 
-export let LOG_TYPES = {
+export const LOG_TYPES = {
   // Level error
   error: {
     label: 'error',
