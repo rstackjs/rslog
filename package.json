@@ -22,7 +22,6 @@
     "bump": "npx bumpp",
     "lint": "rslint",
     "dev": "rslib --watch",
-    "prepare": "rslib",
     "preview": "node ./preview/index.ts",
     "test": "rstest"
   },
