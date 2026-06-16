@@ -1,1 +1,11 @@
+# Ignore artifacts
+dist
+**/dist
+**/.rslib
+compiled
+**/compiled
+doc_build
+**/doc_build
+
+# ignore pnpm-lock
 pnpm-lock.yaml
