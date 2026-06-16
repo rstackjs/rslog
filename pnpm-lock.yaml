@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@rslib/core':
         specifier: ^0.22.1
-        version: 0.22.1(typescript@6.0.3)
+        version: 0.22.1(@typescript/native-preview@7.0.0-dev.20260615.1)(typescript@6.0.3)
       '@rslint/core':
         specifier: ^0.6.1
         version: 0.6.1
@@ -20,6 +20,9 @@ importers:
       '@types/node':
         specifier: ^24.13.2
         version: 24.13.2
+      '@typescript/native-preview':
+        specifier: 7.0.0-dev.20260615.1
+        version: 7.0.0-dev.20260615.1
       path-serializer:
         specifier: ^0.6.0
         version: 0.6.0
@@ -290,6 +293,53 @@ packages:
   '@types/node@24.13.2':
     resolution: {integrity: sha512-fRa09kZTgu8o71KFcDjUFuc7F+dEbZYZmkI0mg5YBTRs0yMKjYHsq/c0urDKeDb+D5qVgXOdFcuu+DZPKOITwA==}
 
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260615.1':
+    resolution: {integrity: sha512-EHrtoVGEEhIhsnGe+b8w0FoM9JfIw5SkoPwO8ifaU0PrYm2UbyPbj2I2hOTxtk458t0irvGz2+8cshylBRbKng==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260615.1':
+    resolution: {integrity: sha512-BcDA56hkk6mrUpysaOVvrdACoX5d2SF1JTwHMoNjT1KysBicExS2wlH0eN0L01iDeqtB73XHl7A4zrKFmKzrBg==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260615.1':
+    resolution: {integrity: sha512-TDAlBpyYCF7Z+ELTH+1tabDE6W3shl+H+Z+nmzaQio1I8pFvbwt2iLlE0Rc9CpRdIeaqr0ppMEgXHoeV3fZFWA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20260615.1':
+    resolution: {integrity: sha512-YRXRS/7ZqrDKXBJhFQcZiOdnHRuRbWoL/QkggpoGfhIuSAh4HvTU0WEUnPM+jRnH2kUMfsSgd8EAnPvmuP7/VA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm]
+    os: [linux]
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20260615.1':
+    resolution: {integrity: sha512-/QDmRWt6abB7fw3yMchjlyDXej/7Dr8mYG4wvGGf6c1hc5Il5UpDQWNHejatdeKvAu+sszz8JhTuL8et47fTTg==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260615.1':
+    resolution: {integrity: sha512-WTJOLoe2rxT0W1i8ndWk2MKrakxRFNki537JZxvKAmSTbyOZznHlW3O3dbryUtTBYA716DDqS3ci24kuIfvBdg==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20260615.1':
+    resolution: {integrity: sha512-4cSCpXG7um18nwmLdU/SjoTv3OcO38/ufTiy1oWVccgGHLJqppiOP9/o+ElKIWhvrp78IaGy8+h3YqEjQ4/pcQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [win32]
+
+  '@typescript/native-preview@7.0.0-dev.20260615.1':
+    resolution: {integrity: sha512-JJ8X1l7H1GrnseK1k30qfQqB8Pz6jw3IALZVIj5oXQeRbUCe0Wx3ljkJEmOpunogdhEfA8IlOggskbUjVsXKBQ==}
+    engines: {node: '>=16.20.0'}
+    hasBin: true
+
   ansi-regex@6.2.2:
     resolution: {integrity: sha512-Bq3SmSpyFHaWjPk8If9yc6svM8c56dB5BAtW4Qbw5jHTwwXXcTLoRMkpDJp6VL0XzlWaCHTXrkFURMYmD0sLqg==}
     engines: {node: '>=12'}
@@ -416,10 +466,10 @@ snapshots:
     transitivePeerDependencies:
       - '@module-federation/runtime-tools'
 
-  '@rslib/core@0.22.1(typescript@6.0.3)':
+  '@rslib/core@0.22.1(@typescript/native-preview@7.0.0-dev.20260615.1)(typescript@6.0.3)':
     dependencies:
       '@rsbuild/core': 2.0.14
-      rsbuild-plugin-dts: 0.22.1(@rsbuild/core@2.0.14)(typescript@6.0.3)
+      rsbuild-plugin-dts: 0.22.1(@rsbuild/core@2.0.14)(@typescript/native-preview@7.0.0-dev.20260615.1)(typescript@6.0.3)
     optionalDependencies:
       typescript: 6.0.3
     transitivePeerDependencies:
@@ -557,6 +607,37 @@ snapshots:
     dependencies:
       undici-types: 7.18.2
 
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260615.1':
+    optional: true
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260615.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260615.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20260615.1':
+    optional: true
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20260615.1':
+    optional: true
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260615.1':
+    optional: true
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20260615.1':
+    optional: true
+
+  '@typescript/native-preview@7.0.0-dev.20260615.1':
+    optionalDependencies:
+      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20260615.1
+      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20260615.1
+      '@typescript/native-preview-linux-arm': 7.0.0-dev.20260615.1
+      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20260615.1
+      '@typescript/native-preview-linux-x64': 7.0.0-dev.20260615.1
+      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20260615.1
+      '@typescript/native-preview-win32-x64': 7.0.0-dev.20260615.1
+
   ansi-regex@6.2.2: {}
 
   assertion-error@2.0.1: {}
@@ -567,11 +648,12 @@ snapshots:
 
   prettier@3.8.4: {}
 
-  rsbuild-plugin-dts@0.22.1(@rsbuild/core@2.0.14)(typescript@6.0.3):
+  rsbuild-plugin-dts@0.22.1(@rsbuild/core@2.0.14)(@typescript/native-preview@7.0.0-dev.20260615.1)(typescript@6.0.3):
     dependencies:
       '@ast-grep/napi': 0.37.0
       '@rsbuild/core': 2.0.14
     optionalDependencies:
+      '@typescript/native-preview': 7.0.0-dev.20260615.1
       typescript: 6.0.3
 
   strip-ansi@7.2.0:
