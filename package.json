@@ -20,7 +20,8 @@
   "scripts": {
     "build": "rslib",
     "bump": "npx bumpp",
-    "lint": "rslint",
+    "lint": "rslint && prettier --check .",
+    "lint:write": "rslint --fix && prettier --write .",
     "dev": "rslib --watch",
     "preview": "node ./preview/index.ts",
     "test": "rstest"
