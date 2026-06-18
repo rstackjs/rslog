@@ -34,6 +34,6 @@ dist/      # generated package output
 
 ## Code style
 
-- Use single quotes and existing Oxfmt conventions.
+- Use single quotes and existing format conventions.
 - Keep TypeScript strict-safe; avoid `any`.
 - Naming: camelCase (functions/files), PascalCase (types/classes).
