@@ -7,9 +7,7 @@ import type { Options, LogMessage, Logger, LogMethods } from './types.js';
 const normalizeErrorMessage = (err: Error) => {
   if (err.stack) {
     const [rawName, ...rest] = err.stack.split('\n');
-    const name = rawName.startsWith('Error: ')
-      ? rawName.slice(7)
-      : rawName;
+    const name = rawName.startsWith('Error: ') ? rawName.slice(7) : rawName;
     return `${name}\n${color.gray(rest.join('\n'))}`;
   }
 

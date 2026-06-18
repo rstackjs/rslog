@@ -1,5 +1,14 @@
 import { defineConfig } from '@rslib/core';
+import { pluginPublint } from 'rsbuild-plugin-publint';
 
 export default defineConfig({
-  lib: [{ syntax: 'es2023', dts: true }],
+  plugins: [pluginPublint()],
+  lib: [
+    {
+      syntax: 'es2023',
+      dts: {
+        tsgo: true,
+      },
+    },
+  ],
 });

@@ -3,7 +3,7 @@
   "version": "2.1.3",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rstackjs/rslog.git"
+    "url": "git+https://github.com/rstackjs/rslog.git"
   },
   "license": "MIT",
   "type": "module",
@@ -19,8 +19,9 @@
   ],
   "scripts": {
     "build": "rslib",
-    "bump": "npx bumpp",
-    "lint": "rslint",
+    "bump": "pnpx bumpp",
+    "lint": "rslint && prettier --check .",
+    "lint:write": "rslint --fix && prettier --write .",
     "dev": "rslib --watch",
     "preview": "node ./preview/index.ts",
     "test": "rstest"
@@ -30,8 +31,10 @@
     "@rslint/core": "^0.6.1",
     "@rstest/core": "^0.10.4",
     "@types/node": "^24.13.2",
+    "@typescript/native-preview": "7.0.0-dev.20260615.1",
     "path-serializer": "^0.6.0",
     "prettier": "^3.8.4",
+    "rsbuild-plugin-publint": "^1.0.0",
     "strip-ansi": "^7.2.0",
     "supports-color": "^10.2.2",
     "typescript": "^6.0.3"
