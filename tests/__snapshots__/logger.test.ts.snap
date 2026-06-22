@@ -1,5 +1,25 @@
 // Rstest Snapshot v1
 
+exports[`logger > should align multi-line messages to label + prefix column 1`] = `
+[
+  [
+    "info    [web] User profile updated:
+              - Name: John Doe
+              - Email: john@example.com",
+  ],
+]
+`;
+
+exports[`logger > should align multi-line messages when alignMultiline is enabled 1`] = `
+[
+  [
+    "info    User profile updated:
+        - Name: John Doe
+        - Email: john@example.com",
+  ],
+]
+`;
+
 exports[`logger > should create new logger with info level correctly 1`] = `
 [
   [
@@ -53,6 +73,17 @@ exports[`logger > should create new logger with warn level correctly 2`] = `
 ]
 `;
 
+exports[`logger > should keep error stacks top-aligned when alignMultiline is enabled 1`] = `
+[
+  [
+    "error   Something failed:
+        - reason A
+    at /rslog/foo/bar.js:29:0
+        - reason B",
+  ],
+]
+`;
+
 exports[`logger > should log as expected 1`] = `
 [
   [
@@ -99,6 +130,13 @@ exports[`logger > should log error with cause correctly 1`] = `
 
 exports[`logger > should log error with stack correctly 1`] = `
 "error       at /rslog/foo/bar.js:29:0
+"
+`;
+
+exports[`logger > should not align Error object output when alignMultiline is enabled 1`] = `
+"error       at /rslog/foo/bar.js:29:0
+
+  [cause]:     at /rslog/foo/bar.js:29:0
 "
 `;
 

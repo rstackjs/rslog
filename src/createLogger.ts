@@ -1,8 +1,10 @@
 import { color } from './color.js';
 import { gradient } from './gradient.js';
 import { LOG_LEVEL, LOG_TYPES } from './constants.js';
-import { isErrorStackMessage } from './utils.js';
+import { isErrorStackMessage, stripAnsi } from './utils.js';
 import type { Options, LogMessage, Logger, LogMethods } from './types.js';
+
+const LABEL_WIDTH = 7;
 
 const normalizeErrorMessage = (err: Error) => {
   if (err.stack) {
@@ -15,7 +17,12 @@ const normalizeErrorMessage = (err: Error) => {
 };
 
 export const createLogger = (options: Options = {}) => {
-  const { level = 'info', prefix, console = globalThis.console } = options;
+  const {
+    level = 'info',
+    prefix,
+    console = globalThis.console,
+    alignMultiline,
+  } = options;
 
   let maxLevel = level;
 
@@ -33,13 +40,17 @@ export const createLogger = (options: Options = {}) => {
 
     let label = '';
     let text = '';
+    let hasLabel = false;
 
     if ('label' in logType) {
-      label = (logType.label || '').padEnd(7);
+      hasLabel = true;
+      label = (logType.label || '').padEnd(LABEL_WIDTH);
       label = color.bold(logType.color ? logType.color(label) : label);
     }
 
-    if (message instanceof Error) {
+    const isErrorObject = message instanceof Error;
+
+    if (isErrorObject) {
       text += normalizeErrorMessage(message);
 
       const { cause } = message;
@@ -61,6 +72,21 @@ export const createLogger = (options: Options = {}) => {
 
     if (prefix) {
       text = `${prefix} ${text}`;
+    }
+
+    if (alignMultiline && hasLabel && !isErrorObject && text.includes('\n')) {
+      const indent = ' '.repeat(
+        LABEL_WIDTH + 1 + (prefix ? stripAnsi(prefix).length + 1 : 0),
+      );
+      const skipStack = level === 'error';
+      text = text
+        .split('\n')
+        .map((line, i) =>
+          i === 0 || line === '' || (skipStack && isErrorStackMessage(line))
+            ? line
+            : indent + line,
+        )
+        .join('\n');
     }
 
     const method = level === 'error' || level === 'warn' ? level : 'log';
