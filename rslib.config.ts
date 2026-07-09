@@ -6,9 +6,7 @@ export default defineConfig({
   lib: [
     {
       syntax: 'es2023',
-      dts: {
-        tsgo: true,
-      },
+      dts: true,
     },
   ],
 });
