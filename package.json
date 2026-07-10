@@ -1,6 +1,6 @@
 {
   "name": "rslog",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rstackjs/rslog.git"
