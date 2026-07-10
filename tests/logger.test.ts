@@ -197,4 +197,51 @@ describe('logger', () => {
       console: customConsole,
     });
   });
+
+  test('should greet with a bold mint color in true-color terminals', async () => {
+    const originalIsTTY = Object.getOwnPropertyDescriptor(
+      process.stdout,
+      'isTTY',
+    );
+    const originalHasColors = Object.getOwnPropertyDescriptor(
+      process.stdout,
+      'hasColors',
+    );
+    const hasColors = rs.fn(() => true);
+    const customConsole = {
+      log: rs.fn(),
+      warn: rs.fn(),
+      error: rs.fn(),
+    };
+
+    Object.defineProperties(process.stdout, {
+      isTTY: { configurable: true, value: true },
+      hasColors: { configurable: true, value: hasColors },
+    });
+
+    try {
+      rs.resetModules();
+      const { createLogger: createTrueColorLogger } =
+        await import('../src/index.js');
+
+      createTrueColorLogger({ console: customConsole }).greet('hello');
+
+      expect((customConsole.log as Mock).mock.calls[0][0]).toBe(
+        '\x1b[1m\x1b[38;2;132;225;199mhello\x1b[39m\x1b[22m',
+      );
+      expect(hasColors).toHaveBeenCalledWith(2 ** 24, process.env);
+    } finally {
+      if (originalIsTTY) {
+        Object.defineProperty(process.stdout, 'isTTY', originalIsTTY);
+      } else {
+        Reflect.deleteProperty(process.stdout, 'isTTY');
+      }
+      if (originalHasColors) {
+        Object.defineProperty(process.stdout, 'hasColors', originalHasColors);
+      } else {
+        Reflect.deleteProperty(process.stdout, 'hasColors');
+      }
+      rs.resetModules();
+    }
+  });
 });

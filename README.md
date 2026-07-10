@@ -46,7 +46,7 @@ import { logger } from 'rslog';
 - Log:
 
 ```js
-// A gradient welcome log
+// A welcome log
 logger.greet(`\n➜ Rslog v1.0.0\n`);
 
 // Info

@@ -35,3 +35,17 @@ export const color = {
   underline: createStyler('underline'),
   strikethrough: createStyler('strikethrough'),
 };
+
+const supportsTrueColor =
+  process.stdout.isTTY === true &&
+  process.stdout.hasColors(2 ** 24, process.env);
+
+export const boldMint: ColorFn = (text) => {
+  const value = String(text);
+
+  if (!supportsTrueColor) {
+    return color.bold(color.cyan(value));
+  }
+
+  return `\x1b[1m\x1b[38;2;132;225;199m${value}\x1b[39m\x1b[22m`;
+};
