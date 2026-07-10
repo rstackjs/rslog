@@ -23,6 +23,46 @@ const printTestLogs = (logger: Logger) => {
 };
 
 describe('logger', () => {
+  test('should respect color settings configured after import', async () => {
+    const originalForceColor = process.env.FORCE_COLOR;
+    const originalNoColor = process.env.NO_COLOR;
+    const originalDisableColors = process.env.NODE_DISABLE_COLORS;
+    const customConsole = {
+      log: rs.fn(),
+      warn: rs.fn(),
+      error: rs.fn(),
+    };
+
+    delete process.env.FORCE_COLOR;
+    delete process.env.NO_COLOR;
+    delete process.env.NODE_DISABLE_COLORS;
+
+    try {
+      rs.resetModules();
+      const { createLogger: createConfiguredLogger } =
+        await import('../src/index.js');
+
+      process.env.FORCE_COLOR = '1';
+      createConfiguredLogger({ console: customConsole }).info('hello');
+
+      const output = (customConsole.log as Mock).mock.calls[0][0].toString();
+      expect(output).not.toBe(stripAnsi(output));
+    } finally {
+      const restoreEnv = (key: string, value: string | undefined) => {
+        if (value === undefined) {
+          delete process.env[key];
+        } else {
+          process.env[key] = value;
+        }
+      };
+
+      restoreEnv('FORCE_COLOR', originalForceColor);
+      restoreEnv('NO_COLOR', originalNoColor);
+      restoreEnv('NODE_DISABLE_COLORS', originalDisableColors);
+      rs.resetModules();
+    }
+  });
+
   test('should log as expected', () => {
     console.log = rs.fn();
     console.warn = rs.fn();

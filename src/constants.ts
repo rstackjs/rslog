@@ -16,10 +16,17 @@ const createLogType = <T extends LogLevel>(
   label: string,
   level: T,
   style: ColorFn,
-) => ({
-  label: color.bold(style(label.padEnd(7))),
-  level,
-});
+) => {
+  let formattedLabel: string | undefined;
+
+  return {
+    // Defer styling until first access so runtime color settings are respected.
+    get label() {
+      return (formattedLabel ??= color.bold(style(label.padEnd(7))));
+    },
+    level,
+  };
+};
 
 export const LOG_TYPES = {
   error: createLogType('error', 'error', color.red),
