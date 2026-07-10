@@ -30,13 +30,8 @@ export const createLogger = (options: Options = {}) => {
       return console.log();
     }
 
-    let label = '';
+    const label = 'label' in logType ? logType.label : '';
     let text = '';
-
-    if ('label' in logType) {
-      label = (logType.label || '').padEnd(7);
-      label = color.bold(logType.color ? logType.color(label) : label);
-    }
 
     if (message instanceof Error) {
       text += normalizeErrorMessage(message);

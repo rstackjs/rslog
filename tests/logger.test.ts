@@ -23,6 +23,29 @@ const printTestLogs = (logger: Logger) => {
 };
 
 describe('logger', () => {
+  test('should respect color settings configured after import', async () => {
+    rs.stubEnv('FORCE_COLOR', undefined);
+    rs.stubEnv('NO_COLOR', undefined);
+    rs.stubEnv('NODE_DISABLE_COLORS', undefined);
+
+    try {
+      rs.resetModules();
+      const { createLogger: createConfiguredLogger } =
+        await import('../src/index.js');
+      const log = rs.fn();
+
+      rs.stubEnv('FORCE_COLOR', '1');
+      createConfiguredLogger({
+        console: { log, warn: rs.fn(), error: rs.fn() },
+      }).info('hello');
+
+      expect(log).toHaveBeenCalledWith(expect.stringContaining('\x1b'));
+    } finally {
+      rs.unstubAllEnvs();
+      rs.resetModules();
+    }
+  });
+
   test('should log as expected', () => {
     console.log = rs.fn();
     console.warn = rs.fn();
