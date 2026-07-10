@@ -1,5 +1,6 @@
 import { color } from './color.js';
-import type { LogType } from './types.js';
+import type { ColorFn } from './color.js';
+import type { LogLevel, LogType } from './types.js';
 
 export const LOG_LEVEL = {
   silent: -1,
@@ -11,47 +12,24 @@ export const LOG_LEVEL = {
   verbose: 3,
 } as const;
 
+const createLogType = <T extends LogLevel>(
+  label: string,
+  level: T,
+  style: ColorFn,
+) => ({
+  label: color.bold(style(label.padEnd(7))),
+  level,
+});
+
 export const LOG_TYPES = {
-  // Level error
-  error: {
-    label: 'error',
-    level: 'error',
-    color: color.red,
-  },
-  // Level warn
-  warn: {
-    label: 'warn',
-    level: 'warn',
-    color: color.yellow,
-  },
-  // Level info
-  info: {
-    label: 'info',
-    level: 'info',
-    color: color.cyan,
-  },
-  start: {
-    label: 'start',
-    level: 'info',
-    color: color.cyan,
-  },
-  ready: {
-    label: 'ready',
-    level: 'info',
-    color: color.green,
-  },
-  success: {
-    label: 'success',
-    level: 'info',
-    color: color.green,
-  },
+  error: createLogType('error', 'error', color.red),
+  warn: createLogType('warn', 'warn', color.yellow),
+  info: createLogType('info', 'info', color.cyan),
+  start: createLogType('start', 'info', color.cyan),
+  ready: createLogType('ready', 'info', color.green),
+  success: createLogType('success', 'info', color.green),
   log: {
     level: 'info',
   },
-  // Level debug
-  debug: {
-    label: 'debug',
-    level: 'verbose',
-    color: color.magenta,
-  },
+  debug: createLogType('debug', 'verbose', color.magenta),
 } satisfies Record<string, LogType>;
