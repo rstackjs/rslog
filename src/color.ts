@@ -40,12 +40,7 @@ const supportsTrueColor =
   process.stdout.isTTY === true &&
   process.stdout.hasColors(2 ** 24, process.env);
 
-export const boldMint: ColorFn = (text) => {
-  const value = String(text);
-
-  if (!supportsTrueColor) {
-    return color.bold(color.cyan(value));
-  }
-
-  return `\x1b[1m\x1b[38;2;132;225;199m${value}\x1b[39m\x1b[22m`;
-};
+export const boldMint: ColorFn = (text) =>
+  supportsTrueColor
+    ? `\x1b[1;38;2;132;225;199m${text}\x1b[39;22m`
+    : color.bold(color.cyan(text));
