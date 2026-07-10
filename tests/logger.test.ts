@@ -250,7 +250,7 @@ describe('logger', () => {
       createTrueColorLogger({ console: customConsole }).greet('hello');
 
       expect((customConsole.log as Mock).mock.calls[0][0]).toBe(
-        '\x1b[1m\x1b[38;2;132;225;199mhello\x1b[39m\x1b[22m',
+        '\x1b[1;38;2;132;225;199mhello\x1b[39;22m',
       );
       expect(hasColors).toHaveBeenCalledWith(2 ** 24, process.env);
     } finally {

@@ -58,7 +58,7 @@ export const createLogger = (options: Options = {}) => {
     }
 
     const method = level === 'error' || level === 'warn' ? level : 'log';
-    console[method](label.length ? `${label} ${text}` : text, ...args);
+    console[method](label ? `${label} ${text}` : text, ...args);
   };
 
   const logger = {
