@@ -24,41 +24,24 @@ const printTestLogs = (logger: Logger) => {
 
 describe('logger', () => {
   test('should respect color settings configured after import', async () => {
-    const originalForceColor = process.env.FORCE_COLOR;
-    const originalNoColor = process.env.NO_COLOR;
-    const originalDisableColors = process.env.NODE_DISABLE_COLORS;
-    const customConsole = {
-      log: rs.fn(),
-      warn: rs.fn(),
-      error: rs.fn(),
-    };
-
-    delete process.env.FORCE_COLOR;
-    delete process.env.NO_COLOR;
-    delete process.env.NODE_DISABLE_COLORS;
+    rs.stubEnv('FORCE_COLOR', undefined);
+    rs.stubEnv('NO_COLOR', undefined);
+    rs.stubEnv('NODE_DISABLE_COLORS', undefined);
 
     try {
       rs.resetModules();
       const { createLogger: createConfiguredLogger } =
         await import('../src/index.js');
+      const log = rs.fn();
 
-      process.env.FORCE_COLOR = '1';
-      createConfiguredLogger({ console: customConsole }).info('hello');
+      rs.stubEnv('FORCE_COLOR', '1');
+      createConfiguredLogger({
+        console: { log, warn: rs.fn(), error: rs.fn() },
+      }).info('hello');
 
-      const output = (customConsole.log as Mock).mock.calls[0][0].toString();
-      expect(output).not.toBe(stripAnsi(output));
+      expect(log).toHaveBeenCalledWith(expect.stringContaining('\x1b'));
     } finally {
-      const restoreEnv = (key: string, value: string | undefined) => {
-        if (value === undefined) {
-          delete process.env[key];
-        } else {
-          process.env[key] = value;
-        }
-      };
-
-      restoreEnv('FORCE_COLOR', originalForceColor);
-      restoreEnv('NO_COLOR', originalNoColor);
-      restoreEnv('NODE_DISABLE_COLORS', originalDisableColors);
+      rs.unstubAllEnvs();
       rs.resetModules();
     }
   });
