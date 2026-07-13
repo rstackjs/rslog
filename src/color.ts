@@ -35,3 +35,12 @@ export const color = {
   underline: createStyler('underline'),
   strikethrough: createStyler('strikethrough'),
 };
+
+const supportsTrueColor =
+  process.stdout.isTTY === true &&
+  process.stdout.hasColors(2 ** 24, process.env);
+
+export const boldMint: ColorFn = (text) =>
+  supportsTrueColor
+    ? `\x1b[1;38;2;132;225;199m${text}\x1b[39;22m`
+    : color.bold(color.cyan(text));

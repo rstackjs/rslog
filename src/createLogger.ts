@@ -1,5 +1,4 @@
-import { color } from './color.js';
-import { gradient } from './gradient.js';
+import { boldMint, color } from './color.js';
 import { LOG_LEVEL, LOG_TYPES } from './constants.js';
 import { isErrorStackMessage, stripAnsi } from './utils.js';
 import type { Options, LogMessage, Logger, LogMethods } from './types.js';
@@ -38,15 +37,9 @@ export const createLogger = (options: Options = {}) => {
       return console.log();
     }
 
-    let label = '';
+    const label = 'label' in logType ? logType.label : '';
     let text = '';
-    let hasLabel = false;
-
-    if ('label' in logType) {
-      hasLabel = true;
-      label = (logType.label || '').padEnd(LABEL_WIDTH);
-      label = color.bold(logType.color ? logType.color(label) : label);
-    }
+    const hasLabel = Boolean(label);
 
     const isErrorObject = message instanceof Error;
 
@@ -90,11 +83,11 @@ export const createLogger = (options: Options = {}) => {
     }
 
     const method = level === 'error' || level === 'warn' ? level : 'log';
-    console[method](label.length ? `${label} ${text}` : text, ...args);
+    console[method](label ? `${label} ${text}` : text, ...args);
   };
 
   const logger = {
-    greet: (message: string) => log('log', gradient(message)),
+    greet: (message: string) => log('log', boldMint(message)),
   } as Logger;
 
   (Object.keys(LOG_TYPES) as LogMethods[]).forEach((key) => {

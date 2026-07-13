@@ -23,6 +23,29 @@ const printTestLogs = (logger: Logger) => {
 };
 
 describe('logger', () => {
+  test('should respect color settings configured after import', async () => {
+    rs.stubEnv('FORCE_COLOR', undefined);
+    rs.stubEnv('NO_COLOR', undefined);
+    rs.stubEnv('NODE_DISABLE_COLORS', undefined);
+
+    try {
+      rs.resetModules();
+      const { createLogger: createConfiguredLogger } =
+        await import('../src/index.js');
+      const log = rs.fn();
+
+      rs.stubEnv('FORCE_COLOR', '1');
+      createConfiguredLogger({
+        console: { log, warn: rs.fn(), error: rs.fn() },
+      }).info('hello');
+
+      expect(log).toHaveBeenCalledWith(expect.stringContaining('\x1b'));
+    } finally {
+      rs.unstubAllEnvs();
+      rs.resetModules();
+    }
+  });
+
   test('should log as expected', () => {
     console.log = rs.fn();
     console.warn = rs.fn();
@@ -198,6 +221,53 @@ describe('logger', () => {
     });
   });
 
+  test('should greet with a bold mint color in true-color terminals', async () => {
+    const originalIsTTY = Object.getOwnPropertyDescriptor(
+      process.stdout,
+      'isTTY',
+    );
+    const originalHasColors = Object.getOwnPropertyDescriptor(
+      process.stdout,
+      'hasColors',
+    );
+    const hasColors = rs.fn(() => true);
+    const customConsole = {
+      log: rs.fn(),
+      warn: rs.fn(),
+      error: rs.fn(),
+    };
+
+    Object.defineProperties(process.stdout, {
+      isTTY: { configurable: true, value: true },
+      hasColors: { configurable: true, value: hasColors },
+    });
+
+    try {
+      rs.resetModules();
+      const { createLogger: createTrueColorLogger } =
+        await import('../src/index.js');
+
+      createTrueColorLogger({ console: customConsole }).greet('hello');
+
+      expect((customConsole.log as Mock).mock.calls[0][0]).toBe(
+        '\x1b[1;38;2;132;225;199mhello\x1b[39;22m',
+      );
+      expect(hasColors).toHaveBeenCalledWith(2 ** 24, process.env);
+    } finally {
+      if (originalIsTTY) {
+        Object.defineProperty(process.stdout, 'isTTY', originalIsTTY);
+      } else {
+        Reflect.deleteProperty(process.stdout, 'isTTY');
+      }
+      if (originalHasColors) {
+        Object.defineProperty(process.stdout, 'hasColors', originalHasColors);
+      } else {
+        Reflect.deleteProperty(process.stdout, 'hasColors');
+      }
+      rs.resetModules();
+    }
+  });
+
   test('should align multi-line messages when alignMultiline is enabled', () => {
     console.log = rs.fn();
     console.error = rs.fn();
@@ -280,11 +350,8 @@ describe('logger', () => {
     const raw = (console.error as Mock).mock.calls[0][0].toString();
     const lines = raw.split('\n');
 
-    // stack line is grayed (still contains ANSI codes after alignment ran)
     expect(lines[1]).toContain(String.fromCharCode(27));
-    // stack line is not indented (starts with the original spaces, not the 8-space align indent)
     expect(stripAnsi(lines[1]).startsWith('    at ')).toBe(true);
-    // non-stack line is indented to the label column
     expect(stripAnsi(lines[2]).startsWith('        - reason B')).toBe(true);
   });
 
@@ -293,8 +360,6 @@ describe('logger', () => {
 
     const alignLogger = createLogger({ alignMultiline: true });
 
-    // "- deployed at server:443:8080" matches the stack regex, but at info
-    // level it is user content, not a stack frame -> must still be aligned.
     alignLogger.info(`Deploy summary:
 - deployed at server:443:8080
 - status: ok`);
