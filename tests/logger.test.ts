@@ -304,6 +304,22 @@ describe('logger', () => {
     ).toMatchSnapshot();
   });
 
+  test('should align multi-line log messages to prefix column', () => {
+    console.log = rs.fn();
+
+    const alignLogger = createLogger({
+      alignMultiline: true,
+      prefix: '[web]',
+    });
+
+    alignLogger.log(`First line
+Second line`);
+
+    expect(stripAnsi((console.log as Mock).mock.calls[0][0].toString()))
+      .toBe(`[web] First line
+      Second line`);
+  });
+
   test('should keep error stacks top-aligned when alignMultiline is enabled', () => {
     console.error = rs.fn();
 

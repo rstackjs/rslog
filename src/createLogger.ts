@@ -3,8 +3,6 @@ import { LOG_LEVEL, LOG_TYPES } from './constants.js';
 import { isErrorStackMessage, stripAnsi } from './utils.js';
 import type { Options, LogMessage, Logger, LogMethods } from './types.js';
 
-const LABEL_WIDTH = 7;
-
 const normalizeErrorMessage = (err: Error) => {
   if (err.stack) {
     const [rawName, ...rest] = err.stack.split('\n');
@@ -38,8 +36,8 @@ export const createLogger = (options: Options = {}) => {
     }
 
     const label = 'label' in logType ? logType.label : '';
+    const header = label ? (prefix ? `${label} ${prefix}` : label) : prefix;
     let text = '';
-    const hasLabel = Boolean(label);
 
     const isErrorObject = message instanceof Error;
 
@@ -63,14 +61,8 @@ export const createLogger = (options: Options = {}) => {
       text = `${message}`;
     }
 
-    if (prefix) {
-      text = `${prefix} ${text}`;
-    }
-
-    if (alignMultiline && hasLabel && !isErrorObject && text.includes('\n')) {
-      const indent = ' '.repeat(
-        LABEL_WIDTH + 1 + (prefix ? stripAnsi(prefix).length + 1 : 0),
-      );
+    if (alignMultiline && header && !isErrorObject && text.includes('\n')) {
+      const indent = ' '.repeat(stripAnsi(header).length + 1);
       const skipStack = level === 'error';
       text = text
         .split('\n')
@@ -83,7 +75,7 @@ export const createLogger = (options: Options = {}) => {
     }
 
     const method = level === 'error' || level === 'warn' ? level : 'log';
-    console[method](label ? `${label} ${text}` : text, ...args);
+    console[method](header ? `${header} ${text}` : text, ...args);
   };
 
   const logger = {
