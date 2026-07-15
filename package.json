@@ -37,7 +37,7 @@
     "strip-ansi": "^7.2.0",
     "typescript": "^7.0.2"
   },
-  "packageManager": "pnpm@11.13.0",
+  "packageManager": "pnpm@11.11.0",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
   },
