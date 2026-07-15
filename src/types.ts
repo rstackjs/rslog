@@ -29,6 +29,13 @@ export interface Options {
    * @default globalThis.console
    */
   console?: Pick<Console, 'log' | 'warn' | 'error'>;
+  /**
+   * Aligns continuation lines of multi-line messages to the first line's
+   * content column (label + prefix). Error object stacks keep their original
+   * top-aligned formatting.
+   * @default false
+   */
+  alignMultiline?: boolean;
 }
 
 export type LogMethods = keyof typeof LOG_TYPES;

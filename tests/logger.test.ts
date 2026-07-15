@@ -267,4 +267,125 @@ describe('logger', () => {
       rs.resetModules();
     }
   });
+
+  test('should align multi-line messages when alignMultiline is enabled', () => {
+    console.log = rs.fn();
+    console.error = rs.fn();
+
+    const alignLogger = createLogger({ alignMultiline: true });
+
+    alignLogger.info(`User profile updated:
+- Name: John Doe
+- Email: john@example.com`);
+
+    expect(
+      (console.log as Mock).mock.calls.map((items) =>
+        items.map((item) => stripAnsi(item.toString())),
+      ),
+    ).toMatchSnapshot();
+  });
+
+  test('should align multi-line messages to label + prefix column', () => {
+    console.log = rs.fn();
+
+    const alignLogger = createLogger({
+      alignMultiline: true,
+      prefix: '[web]',
+    });
+
+    alignLogger.info(`User profile updated:
+- Name: John Doe
+- Email: john@example.com`);
+
+    expect(
+      (console.log as Mock).mock.calls.map((items) =>
+        items.map((item) => stripAnsi(item.toString())),
+      ),
+    ).toMatchSnapshot();
+  });
+
+  test('should keep error stacks top-aligned when alignMultiline is enabled', () => {
+    console.error = rs.fn();
+
+    const alignLogger = createLogger({ alignMultiline: true });
+
+    alignLogger.error(`Something failed:
+- reason A
+    at /rslog/foo/bar.js:29:0
+- reason B`);
+
+    expect(
+      (console.error as Mock).mock.calls.map((items) =>
+        items.map((item) => stripAnsi(item.toString())),
+      ),
+    ).toMatchSnapshot();
+  });
+
+  test('should not align Error object output when alignMultiline is enabled', () => {
+    console.error = rs.fn();
+
+    const alignLogger = createLogger({ alignMultiline: true });
+
+    const err = new Error('this is an error message with cause', {
+      cause: getErrorCause(),
+    });
+    err.stack = '    at /rslog/foo/bar.js:29:0';
+
+    alignLogger.error(err);
+
+    expect(
+      stripAnsi((console.error as Mock).mock.calls[0][0].toString()),
+    ).toMatchSnapshot();
+  });
+
+  test('should keep grayed error stack un-indented and colored when alignMultiline is enabled', () => {
+    console.error = rs.fn();
+
+    const alignLogger = createLogger({ alignMultiline: true });
+
+    alignLogger.error(`Something failed:
+    at /rslog/foo/bar.js:29:0
+- reason B`);
+
+    const raw = (console.error as Mock).mock.calls[0][0].toString();
+    const lines = raw.split('\n');
+
+    expect(lines[1]).toContain(String.fromCharCode(27));
+    expect(stripAnsi(lines[1]).startsWith('    at ')).toBe(true);
+    expect(stripAnsi(lines[2]).startsWith('        - reason B')).toBe(true);
+  });
+
+  test('should align stack-like lines in non-error levels (no stack exemption)', () => {
+    console.log = rs.fn();
+
+    const alignLogger = createLogger({ alignMultiline: true });
+
+    alignLogger.info(`Deploy summary:
+- deployed at server:443:8080
+- status: ok`);
+
+    const lines = stripAnsi(
+      (console.log as Mock).mock.calls[0][0].toString(),
+    ).split('\n');
+
+    expect(lines[0].startsWith('info    Deploy summary:')).toBe(true);
+    expect(lines[1].startsWith('        - deployed at server:443:8080')).toBe(
+      true,
+    );
+    expect(lines[2].startsWith('        - status: ok')).toBe(true);
+  });
+
+  test('should not add trailing whitespace on blank lines when alignMultiline is enabled', () => {
+    console.log = rs.fn();
+
+    const alignLogger = createLogger({ alignMultiline: true });
+
+    alignLogger.info(`Part 1
+
+Part 2`);
+
+    const lines = (console.log as Mock).mock.calls[0][0].toString().split('\n');
+
+    expect(lines[1]).toBe('');
+  });
 });

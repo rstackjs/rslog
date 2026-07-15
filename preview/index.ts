@@ -1,4 +1,4 @@
-import { logger } from '../dist/index.js';
+import { createLogger, logger } from '../dist/index.js';
 import { getErrorCause } from './cause.ts';
 
 logger.greet(`\n➜ Rslog v1.0.0\n`);
@@ -16,3 +16,32 @@ logger.error(
     cause: getErrorCause(),
   }),
 );
+
+// multi-line alignment demo
+const alignLogger = createLogger({ alignMultiline: true });
+const prefixAlignLogger = createLogger({
+  alignMultiline: true,
+  prefix: '[web]',
+});
+
+alignLogger.info(`User profile updated:
+- Name: John Doe
+- Email: john@example.com
+- Phone: +1234567890`);
+
+prefixAlignLogger.info(`User profile updated:
+- Name: John Doe
+- Email: john@example.com`);
+
+// error stacks stay top-aligned even with alignMultiline
+alignLogger.error(`Something failed:
+- reason A
+    at /rslog/foo/bar.js:29:0
+- reason B`);
+
+// pre-formatted JSON content (demonstrates the double-indent trade-off)
+alignLogger.info(`Config loaded:
+{
+  "port": 3000,
+  "host": "localhost"
+}`);
