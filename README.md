@@ -186,7 +186,9 @@ logger.info('server started');
 
 You can import `color` directly from `rslog` to style your own output:
 
-It is a small wrapper around Node.js `styleText`, with a simpler API for common styling.
+It is a small wrapper around Node.js
+[`styleText`](https://nodejs.org/api/util.html#utilstyletextformat-text-options),
+with a simpler API for common styling.
 
 ```js
 import { color, logger } from 'rslog';
@@ -195,6 +197,26 @@ logger.success(color.green('done'));
 logger.info(color.bold(color.blue('build complete')));
 logger.error(color.red('something went wrong'));
 ```
+
+Each method accepts a `string` or `number` and returns a styled string. You can
+combine multiple styles by nesting method calls.
+
+| Method                      | Effect                         |
+| --------------------------- | ------------------------------ |
+| `color.bold(text)`          | Makes the text bold            |
+| `color.dim(text)`           | Makes the text dim             |
+| `color.underline(text)`     | Underlines the text            |
+| `color.strikethrough(text)` | Adds a strikethrough           |
+| `color.black(text)`         | Colors the text black          |
+| `color.red(text)`           | Colors the text red            |
+| `color.green(text)`         | Colors the text green          |
+| `color.yellow(text)`        | Colors the text yellow         |
+| `color.blue(text)`          | Colors the text blue           |
+| `color.magenta(text)`       | Colors the text magenta        |
+| `color.cyan(text)`          | Colors the text cyan           |
+| `color.white(text)`         | Colors the text white          |
+| `color.gray(text)`          | Colors the text gray           |
+| `color.reset(text)`         | Resets all styles for the text |
 
 ## Environment
 
