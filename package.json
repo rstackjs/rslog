@@ -29,15 +29,15 @@
   "devDependencies": {
     "@rslib/core": "^0.23.2",
     "@rslint/core": "^0.8.0",
-    "@rstest/core": "^0.11.1",
+    "@rstest/core": "^0.11.8",
     "@types/node": "^24.13.3",
     "path-serializer": "^0.6.0",
-    "prettier": "^3.9.5",
+    "prettier": "^3.9.6",
     "rsbuild-plugin-publint": "^1.0.0",
     "strip-ansi": "^7.2.0",
     "typescript": "^7.0.2"
   },
-  "packageManager": "pnpm@11.11.0",
+  "packageManager": "pnpm@11.21.0",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
   },
