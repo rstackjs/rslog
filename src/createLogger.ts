@@ -1,7 +1,7 @@
-import { boldMint, color } from './color.js';
-import { LOG_LEVEL, LOG_TYPES } from './constants.js';
-import { isErrorStackMessage, stripAnsi } from './utils.js';
-import type { Options, LogMessage, Logger, LogMethods } from './types.js';
+import { boldMint, color } from './color.ts';
+import { LOG_LEVEL, LOG_TYPES } from './constants.ts';
+import { isErrorStackMessage, stripAnsi } from './utils.ts';
+import type { Options, LogMessage, Logger, LogMethods } from './types.ts';
 
 const normalizeErrorMessage = (err: Error) => {
   if (err.stack) {

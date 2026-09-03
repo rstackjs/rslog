@@ -1,7 +1,7 @@
-import { createLogger } from './createLogger.js';
+import { createLogger } from './createLogger.ts';
 
 export { createLogger };
-export { color } from './color.js';
+export { color } from './color.ts';
 
 export const logger = createLogger();
 
@@ -12,4 +12,4 @@ export type {
   LogLevel,
   LogMessage,
   LogFunction,
-} from './types.js';
+} from './types.ts';

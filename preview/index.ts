@@ -1,4 +1,4 @@
-import { createLogger, logger } from '../dist/index.js';
+import { createLogger, logger } from '../src/index.ts';
 import { getErrorCause } from './cause.ts';
 
 logger.greet(`\n➜ Rslog v1.0.0\n`);
