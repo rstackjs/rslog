@@ -3,13 +3,14 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "target": "ES2023",
-    "types": ["node", "@rstest/core/globals"],
+    "types": ["node", "rstack/test/globals"],
     "lib": ["DOM", "ESNext"],
     "declaration": true,
     "isolatedModules": true,
     "skipLibCheck": true,
     "module": "nodenext",
-    "moduleResolution": "nodenext"
+    "moduleResolution": "nodenext",
+    "rewriteRelativeImportExtensions": true
   },
   "include": ["src"]
 }

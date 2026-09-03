@@ -2,11 +2,12 @@
 
 ## Stack
 
-- Node.js `^20.19.0 || >=22.12.0`
+- Package runtime: Node.js `^20.19.0 || >=22.12.0`
+- Development toolchain: Node.js `^22.18.0 || >=24.3.0`
 - `pnpm` single-package workspace
 - TypeScript pure ESM package
-- Build: `rslib` with tsgo declarations and publint
-- Test runner: `rstest`
+- Build: `rs lib` with tsgo declarations and publint
+- Test runner: `rs test`
 
 ## Commands (run early)
 
@@ -15,7 +16,7 @@
 corepack enable && pnpm install
 
 # dev checks
-pnpm lint
+pnpm check
 pnpm test
 
 # build / package
@@ -27,8 +28,8 @@ npm pack --dry-run
 
 ```text
 src/       # logger source and public exports
-tests/     # rstest tests and snapshots
-preview/   # local manual preview that imports dist
+tests/     # Rstack test suites and snapshots
+preview/   # local manual preview that imports TypeScript source
 dist/      # generated package output
 ```
 

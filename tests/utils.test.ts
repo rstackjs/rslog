@@ -1,4 +1,4 @@
-import { isErrorStackMessage } from '../src/utils.js';
+import { isErrorStackMessage } from '../src/utils.ts';
 
 describe('isErrorStackMessage', () => {
   test('should test error stack message correctly', () => {

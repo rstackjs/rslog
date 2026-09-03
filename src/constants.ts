@@ -1,6 +1,6 @@
-import { color } from './color.js';
-import type { ColorFn } from './color.js';
-import type { LogLevel, LogType } from './types.js';
+import { color } from './color.ts';
+import type { ColorFn } from './color.ts';
+import type { LogLevel, LogType } from './types.ts';
 
 export const LOG_LEVEL = {
   silent: -1,

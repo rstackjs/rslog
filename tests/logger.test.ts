@@ -1,5 +1,5 @@
-import { createLogger, Logger, logger } from '../src/index.js';
-import { expect, test, describe, rs, Mock } from '@rstest/core';
+import { createLogger, Logger, logger } from '../src/index.ts';
+import { expect, test, describe, rs, Mock } from 'rstack/test';
 import stripAnsi from 'strip-ansi';
 import { createSnapshotSerializer } from 'path-serializer';
 
@@ -31,7 +31,7 @@ describe('logger', () => {
     try {
       rs.resetModules();
       const { createLogger: createConfiguredLogger } =
-        await import('../src/index.js');
+        await import('../src/index.ts');
       const log = rs.fn();
 
       rs.stubEnv('FORCE_COLOR', '1');
@@ -245,7 +245,7 @@ describe('logger', () => {
     try {
       rs.resetModules();
       const { createLogger: createTrueColorLogger } =
-        await import('../src/index.js');
+        await import('../src/index.ts');
 
       createTrueColorLogger({ console: customConsole }).greet('hello');
 
@@ -355,20 +355,28 @@ Second line`);
   });
 
   test('should keep grayed error stack un-indented and colored when alignMultiline is enabled', () => {
-    console.error = rs.fn();
+    rs.stubEnv('FORCE_COLOR', '1');
+    rs.stubEnv('NO_COLOR', undefined);
+    rs.stubEnv('NODE_DISABLE_COLORS', undefined);
 
-    const alignLogger = createLogger({ alignMultiline: true });
+    try {
+      console.error = rs.fn();
 
-    alignLogger.error(`Something failed:
+      const alignLogger = createLogger({ alignMultiline: true });
+
+      alignLogger.error(`Something failed:
     at /rslog/foo/bar.js:29:0
 - reason B`);
 
-    const raw = (console.error as Mock).mock.calls[0][0].toString();
-    const lines = raw.split('\n');
+      const raw = (console.error as Mock).mock.calls[0][0].toString();
+      const lines = raw.split('\n');
 
-    expect(lines[1]).toContain(String.fromCharCode(27));
-    expect(stripAnsi(lines[1]).startsWith('    at ')).toBe(true);
-    expect(stripAnsi(lines[2]).startsWith('        - reason B')).toBe(true);
+      expect(lines[1]).toContain(String.fromCharCode(27));
+      expect(stripAnsi(lines[1]).startsWith('    at ')).toBe(true);
+      expect(stripAnsi(lines[2]).startsWith('        - reason B')).toBe(true);
+    } finally {
+      rs.unstubAllEnvs();
+    }
   });
 
   test('should align stack-like lines in non-error levels (no stack exemption)', () => {

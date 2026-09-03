@@ -1,5 +1,5 @@
-import type { ColorFn } from './color.js';
-import type { LOG_TYPES } from './constants.js';
+import type { ColorFn } from './color.ts';
+import type { LOG_TYPES } from './constants.ts';
 
 export type LogLevel = 'silent' | 'error' | 'warn' | 'info' | 'log' | 'verbose';
 
