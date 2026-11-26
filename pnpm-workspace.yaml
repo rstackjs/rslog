@@ -13,3 +13,8 @@ minimumReleaseAgeExclude:
   - 'rsbuild-plugin-*'
   - rstack
   - typescript
+
+permissions:
+  rstack:
+    skills:
+      - rstack-cli-docs

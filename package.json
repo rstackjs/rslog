@@ -32,11 +32,11 @@
     "@types/node": "^24.19.2",
     "path-serializer": "^0.7.0",
     "rsbuild-plugin-publint": "^1.0.0",
-    "rstack": "^0.8.3",
+    "rstack": "^0.9.5",
     "strip-ansi": "^7.2.0",
     "typescript": "^7.0.2"
   },
-  "packageManager": "pnpm@12.11.2",
+  "packageManager": "pnpm@12.18.0",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
   },
